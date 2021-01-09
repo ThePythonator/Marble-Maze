@@ -1,6 +1,6 @@
-title: game title
-description: game description
-author: you
+title: Marble Maze
+description: Get the marble to the exit.
+author: ThePythonator
 splash:
   file: assets/no-image.png
 icon:
