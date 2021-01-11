@@ -1,4 +1,8 @@
 #include "game.hpp"
+#include "assets.hpp"
+
+#define SCREEN_WIDTH 160
+#define SCREEN_HEIGHT 120
 
 using namespace blit;
 
@@ -29,8 +33,13 @@ void render(uint32_t time) {
     screen.mask = nullptr;
     screen.pen = Pen(255, 255, 255);
     screen.rectangle(Rect(0, 0, 320, 14));
+    screen.text(std::to_string(blit::tilt.x) + ", " + std::to_string(blit::tilt.y), minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 2 / 3), true, TextAlign::center_center);
+
     screen.pen = Pen(0, 0, 0);
     screen.text("Hello 32blit!", minimal_font, Point(5, 4));
+
+    //screen.text(std::to_string(blit::tilt.x) + ", " + std::to_string(blit::tilt.y))
+    
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -41,4 +50,6 @@ void render(uint32_t time) {
 // amount if milliseconds elapsed since the start of your game
 //
 void update(uint32_t time) {
+    //gravity.x = blit::tilt.x;
+    //gravity.y = blit::tilt.y;
 }
