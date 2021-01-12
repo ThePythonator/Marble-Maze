@@ -6,6 +6,8 @@
 
 #define SPRITE_SIZE 8
 
+#define SPEED 4
+
 using namespace blit;
 
 struct Ball {
@@ -87,8 +89,8 @@ void update(uint32_t time) {
     marble.xVelocity += blit::tilt.x;
     marble.yVelocity += blit::tilt.y;
 
-    marble.xPosition += marble.xVelocity * dt;
-    marble.yPosition += marble.yVelocity * dt;
+    marble.xPosition += marble.xVelocity * dt * SPEED;
+    marble.yPosition += marble.yVelocity * dt * SPEED;
 
     marble.xPosition = clamp(marble.xPosition, SPRITE_SIZE / 2, SCREEN_WIDTH - SPRITE_SIZE / 2);
     marble.yPosition = clamp(marble.yPosition, SPRITE_SIZE / 2, SCREEN_HEIGHT - SPRITE_SIZE / 2);
