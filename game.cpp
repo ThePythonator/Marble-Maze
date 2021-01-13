@@ -7,7 +7,9 @@
 #define SPRITE_SIZE 8
 
 #define SPEED 4
-#define ACCELERATION 4
+#define ACCELERATION 300
+
+#define MAX_VELOCITY 200
 
 using namespace blit;
 
@@ -71,7 +73,7 @@ void render(uint32_t time) {
     screen.rectangle(Rect(marble.xPosition - SPRITE_SIZE / 2, marble.yPosition - SPRITE_SIZE / 2, SPRITE_SIZE, SPRITE_SIZE));
 
     screen.pen = Pen(0, 0, 0);
-    screen.text("Hello 32blit!", minimal_font, Point(5, 4));
+    //screen.text("Hello 32blit!", minimal_font, Point(5, 4));
 
     //screen.text(std::to_string(blit::tilt.x) + ", " + std::to_string(blit::tilt.y))
     
@@ -88,8 +90,11 @@ void update(uint32_t time) {
     dt = (time - lastTime) / 1000.0;
     lastTime = time;
 
-    marble.xVelocity += tilt.x * tilt.x * ACCELERATION; //blit::tilt.x * ACCELERATION; //squared for damping
-    marble.yVelocity += tilt.y * tilt.y * ACCELERATION; //blit::tilt.y * ACCELERATION;
+    marble.xVelocity += tilt.x * std::abs(tilt.x) * ACCELERATION * dt; //blit::tilt.x * ACCELERATION; //squared for damping
+    marble.yVelocity += tilt.y * std::abs(tilt.y) * ACCELERATION * dt; //blit::tilt.y * ACCELERATION;
+
+    marble.xVelocity = clamp(marble.xVelocity, -MAX_VELOCITY, MAX_VELOCITY);
+    marble.yVelocity = clamp(marble.yVelocity, -MAX_VELOCITY, MAX_VELOCITY);
 
     marble.xPosition += marble.xVelocity * dt * SPEED;
     marble.yPosition += marble.yVelocity * dt * SPEED;
