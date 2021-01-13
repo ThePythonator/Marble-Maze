@@ -7,6 +7,7 @@
 #define SPRITE_SIZE 8
 
 #define SPEED 4
+#define ACCELERATION 4
 
 using namespace blit;
 
@@ -86,12 +87,27 @@ void update(uint32_t time) {
     dt = (time - lastTime) / 1000.0;
     lastTime = time;
 
-    marble.xVelocity += blit::tilt.x;
-    marble.yVelocity += blit::tilt.y;
+    marble.xVelocity += blit::tilt.x * ACCELERATION;
+    marble.yVelocity += blit::tilt.y * ACCELERATION;
 
     marble.xPosition += marble.xVelocity * dt * SPEED;
     marble.yPosition += marble.yVelocity * dt * SPEED;
 
-    marble.xPosition = clamp(marble.xPosition, SPRITE_SIZE / 2, SCREEN_WIDTH - SPRITE_SIZE / 2);
-    marble.yPosition = clamp(marble.yPosition, SPRITE_SIZE / 2, SCREEN_HEIGHT - SPRITE_SIZE / 2);
+    if (marble.xPosition < SPRITE_SIZE / 2) {
+        marble.xPosition = SPRITE_SIZE / 2;
+        marble.xVelocity = 0;
+    }
+    else if (marble.xPosition > SCREEN_WIDTH - SPRITE_SIZE / 2) {
+        marble.xPosition = SCREEN_WIDTH - SPRITE_SIZE / 2;
+        marble.xVelocity = 0;
+    }
+
+    if (marble.yPosition < SPRITE_SIZE / 2) {
+        marble.yPosition = SPRITE_SIZE / 2;
+        marble.yVelocity = 0;
+    }
+    else if (marble.yPosition > SCREEN_HEIGHT - SPRITE_SIZE / 2) {
+        marble.yPosition = SCREEN_HEIGHT - SPRITE_SIZE / 2;
+        marble.yVelocity = 0;
+    }
 }
