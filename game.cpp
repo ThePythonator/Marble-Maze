@@ -63,7 +63,8 @@ void render(uint32_t time) {
     screen.mask = nullptr;
     screen.pen = Pen(255, 255, 255);
     //screen.rectangle(Rect(0, 0, 320, 14));
-    screen.text(std::to_string(blit::tilt.x) + ", " + std::to_string(blit::tilt.y), minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), true);
+    screen.text(std::to_string(tilt.x), minimal_font, Point(SCREEN_WIDTH / 3, SCREEN_HEIGHT / 2), true, TextAlign::right);
+    screen.text(std::to_string(tilt.y), minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), true, TextAlign::left);
 
 
 
@@ -87,8 +88,8 @@ void update(uint32_t time) {
     dt = (time - lastTime) / 1000.0;
     lastTime = time;
 
-    marble.xVelocity += blit::tilt.x * ACCELERATION;
-    marble.yVelocity += blit::tilt.y * ACCELERATION;
+    marble.xVelocity += tilt.x * tilt.x * ACCELERATION; //blit::tilt.x * ACCELERATION; //squared for damping
+    marble.yVelocity += tilt.y * tilt.y * ACCELERATION; //blit::tilt.y * ACCELERATION;
 
     marble.xPosition += marble.xVelocity * dt * SPEED;
     marble.yPosition += marble.yVelocity * dt * SPEED;
