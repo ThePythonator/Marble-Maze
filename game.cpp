@@ -99,30 +99,37 @@ void update(uint32_t time) {
     dt = (time - lastTime) / 1000.0;
     lastTime = time;
 
-    marble.xVelocity += tilt.x * std::abs(tilt.x) * ACCELERATION * dt; //blit::tilt.x * ACCELERATION; //squared for damping
-    marble.yVelocity += tilt.y * std::abs(tilt.y) * ACCELERATION * dt; //blit::tilt.y * ACCELERATION;
-
-    marble.xVelocity = clamp(marble.xVelocity, -MAX_VELOCITY, MAX_VELOCITY);
-    marble.yVelocity = clamp(marble.yVelocity, -MAX_VELOCITY, MAX_VELOCITY);
-
-    marble.xPosition += marble.xVelocity * dt * SPEED;
-    marble.yPosition += marble.yVelocity * dt * SPEED;
-
-    if (marble.xPosition < SPRITE_SIZE / 2) {
-        marble.xPosition = SPRITE_SIZE / 2;
-        marble.xVelocity = 0;
+    if (state == 0) {
+        if (buttons.pressed & Button::A) {
+            state = 1;
+        }
     }
-    else if (marble.xPosition > SCREEN_WIDTH - SPRITE_SIZE / 2) {
-        marble.xPosition = SCREEN_WIDTH - SPRITE_SIZE / 2;
-        marble.xVelocity = 0;
-    }
+    else if (state == 1) {
+        marble.xVelocity += tilt.x * std::abs(tilt.x) * ACCELERATION * dt; //blit::tilt.x * ACCELERATION; //squared for damping
+        marble.yVelocity += tilt.y * std::abs(tilt.y) * ACCELERATION * dt; //blit::tilt.y * ACCELERATION;
 
-    if (marble.yPosition < SPRITE_SIZE / 2) {
-        marble.yPosition = SPRITE_SIZE / 2;
-        marble.yVelocity = 0;
-    }
-    else if (marble.yPosition > SCREEN_HEIGHT - SPRITE_SIZE / 2) {
-        marble.yPosition = SCREEN_HEIGHT - SPRITE_SIZE / 2;
-        marble.yVelocity = 0;
+        marble.xVelocity = clamp(marble.xVelocity, -MAX_VELOCITY, MAX_VELOCITY);
+        marble.yVelocity = clamp(marble.yVelocity, -MAX_VELOCITY, MAX_VELOCITY);
+
+        marble.xPosition += marble.xVelocity * dt * SPEED;
+        marble.yPosition += marble.yVelocity * dt * SPEED;
+
+        if (marble.xPosition < SPRITE_SIZE / 2) {
+            marble.xPosition = SPRITE_SIZE / 2;
+            marble.xVelocity = 0;
+        }
+        else if (marble.xPosition > SCREEN_WIDTH - SPRITE_SIZE / 2) {
+            marble.xPosition = SCREEN_WIDTH - SPRITE_SIZE / 2;
+            marble.xVelocity = 0;
+        }
+
+        if (marble.yPosition < SPRITE_SIZE / 2) {
+            marble.yPosition = SPRITE_SIZE / 2;
+            marble.yVelocity = 0;
+        }
+        else if (marble.yPosition > SCREEN_HEIGHT - SPRITE_SIZE / 2) {
+            marble.yPosition = SCREEN_HEIGHT - SPRITE_SIZE / 2;
+            marble.yVelocity = 0;
+        }
     }
 }
