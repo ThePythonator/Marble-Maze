@@ -6,16 +6,21 @@
 
 #define SPRITE_SIZE 8
 
-#define SPEED 4
-#define ACCELERATION 300
+#define SPEED 100
+#define ACCELERATION 5
 
-#define MAX_VELOCITY 200
+#define MAX_VELOCITY 1
 
 using namespace blit;
 
 struct Ball {
     float xPosition, yPosition;
     float xVelocity, yVelocity;
+};
+
+struct Wall {
+    int xPosition, yPosition;
+    int width, height;
 };
 
 int state = 0;
