@@ -69,13 +69,17 @@ void render(uint32_t time) {
     screen.alpha = 255;
     screen.mask = nullptr;
     screen.pen = Pen(255, 255, 255);
-    //screen.rectangle(Rect(0, 0, 320, 14));
-    screen.text(std::to_string(tilt.x), minimal_font, Point(SCREEN_WIDTH / 3, SCREEN_HEIGHT / 2), true, TextAlign::right);
-    screen.text(std::to_string(tilt.y), minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), true, TextAlign::left);
 
+    if (state == 0) {
+        screen.text("Marble Maze", minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3), true, TextAlign::center_center);
+        screen.text("Press A to start", minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 2 / 3), true, TextAlign::center_center);
+    }
+    else if (state == 1) {
+        screen.text(std::to_string(tilt.x), minimal_font, Point(SCREEN_WIDTH / 3, SCREEN_HEIGHT / 2), true, TextAlign::right);
+        screen.text(std::to_string(tilt.y), minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), true, TextAlign::left);
 
-
-    screen.rectangle(Rect(marble.xPosition - SPRITE_SIZE / 2, marble.yPosition - SPRITE_SIZE / 2, SPRITE_SIZE, SPRITE_SIZE));
+        screen.rectangle(Rect(marble.xPosition - SPRITE_SIZE / 2, marble.yPosition - SPRITE_SIZE / 2, SPRITE_SIZE, SPRITE_SIZE));
+    }
 
     screen.pen = Pen(0, 0, 0);
     //screen.text("Hello 32blit!", minimal_font, Point(5, 4));
