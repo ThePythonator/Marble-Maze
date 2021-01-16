@@ -1,3 +1,3 @@
 #include "32blit.hpp"
 
-//void load_level(int);
+void load_level(int);
