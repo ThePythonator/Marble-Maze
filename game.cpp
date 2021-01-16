@@ -4,18 +4,20 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
-#define SPRITE_SIZE 8
+//#define SPRITE_SIZE 8
 
-#define LEVEL_COUNT 1
+//#define LEVEL_COUNT 1
 // LEVEL_LENGTH is total number of possible wall blocks
-#define LEVEL_LENGTH 1200
+//#define LEVEL_LENGTH 1200
 
-#define SPEED 100
-#define ACCELERATION 5
+//#define SPEED 100
+//#define ACCELERATION 5
 
-#define MAX_VELOCITY 1
+//#define MAX_VELOCITY 1
 
 using namespace blit;
+/*
+void load_level(int);
 
 struct Ball {
     float xPosition, yPosition;
@@ -27,9 +29,9 @@ struct Wall {
 
     int x, y;
     int type;
-};
+};*/
 
-int state = 0;
+int state = 0;/*
 float dt;
 uint32_t lastTime = 0;
 
@@ -128,7 +130,7 @@ void load_level(int levelNumber) {
             walls.push_back(wall);
         }
     }
-}
+}*/
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -158,7 +160,7 @@ void render(uint32_t time) {
     screen.pen = Pen(255, 255, 255);
 
     //screen.blit(background, Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), Point(0, 0), false);
-
+    /*
     if (state == 0) {
         screen.text("Marble Maze", minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3), true, TextAlign::center_center);
         screen.text("Press A to start", minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 2 / 3), true, TextAlign::center_center);
@@ -169,12 +171,14 @@ void render(uint32_t time) {
 
         /*for (int i = 0; i < walls.size(); i++) {
             render_wall(walls.at(i));
-        }*/
+        }
 
         //render_ball();
 
         screen.rectangle(Rect(marble.xPosition - SPRITE_SIZE / 2, marble.yPosition - SPRITE_SIZE / 2, SPRITE_SIZE, SPRITE_SIZE));
-    }
+    }*/
+
+    screen.text("Marble Maze", minimal_font, Point(20, 20));
 
     screen.pen = Pen(0, 0, 0);
     //screen.text("Hello 32blit!", minimal_font, Point(5, 4));
@@ -191,9 +195,9 @@ void render(uint32_t time) {
 // amount if milliseconds elapsed since the start of your game
 //
 void update(uint32_t time) {
-    dt = (time - lastTime) / 1000.0;
-    lastTime = time;
-
+    //dt = (time - lastTime) / 1000.0;
+    //lastTime = time;
+    /*
     if (state == 0) {
         if (buttons.pressed & Button::A) {
             state = 1;
@@ -230,5 +234,5 @@ void update(uint32_t time) {
         }
         
         // check collisions
-    }
+    }*/
 }
