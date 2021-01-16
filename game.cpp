@@ -171,7 +171,7 @@ void render(uint32_t time) {
         screen.text("Marble Maze", minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3), true, TextAlign::center_center);
         screen.text("Press A to start", minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 2 / 3), true, TextAlign::center_center);
     }
-    else if (state == State::game) {/*
+    else if (state == State::game) {
         screen.text(std::to_string(tilt.x), minimal_font, Point(SCREEN_WIDTH / 3, SCREEN_HEIGHT / 2), true, TextAlign::right);
         screen.text(std::to_string(tilt.y), minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), true, TextAlign::left);
 
@@ -181,7 +181,7 @@ void render(uint32_t time) {
 
         render_ball();
 
-        //screen.rectangle(Rect(marble.xPosition - SPRITE_SIZE / 2, marble.yPosition - SPRITE_SIZE / 2, SPRITE_SIZE, SPRITE_SIZE));*/
+        //screen.rectangle(Rect(marble.xPosition - SPRITE_SIZE / 2, marble.yPosition - SPRITE_SIZE / 2, SPRITE_SIZE, SPRITE_SIZE));
     }
 
     screen.text(std::to_string(state), minimal_font, Point(20, 20));
@@ -207,10 +207,10 @@ void update(uint32_t time) {
     if (state == State::title) {
         if (buttons.pressed & Button::A) {
             state = State::game;
-            //start_game();
+            start_game();
         }
     }
-    else if (state == State::game) {/*
+    else if (state == State::game) {
         marble.xVelocity += tilt.x * std::abs(tilt.x) * ACCELERATION * dt; //blit::tilt.x * ACCELERATION; //squared for damping
         marble.yVelocity += tilt.y * std::abs(tilt.y) * ACCELERATION * dt; //blit::tilt.y * ACCELERATION;
 
@@ -239,6 +239,6 @@ void update(uint32_t time) {
             marble.yVelocity = 0;
         }
         
-        // check collisions*/
+        // check collisions
     }
 }
