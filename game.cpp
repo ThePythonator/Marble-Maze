@@ -31,7 +31,13 @@ struct Wall {
 
 void load_level(int);
 
-int state = 0;
+enum State {
+    title,
+    game
+};
+
+State state = State::title;
+
 float dt;
 uint32_t lastTime = 0;
 
@@ -141,7 +147,6 @@ void load_level(int levelNumber) {
 void init() {
     set_screen_mode(ScreenMode::hires);
     screen.sprites = Surface::load(asset_sprites);
-    state = 0; //need this for some reason
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -162,11 +167,11 @@ void render(uint32_t time) {
 
     screen.blit(background, Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), Point(0, 0), false);
     
-    if (state == 0) {
+    if (state == State::title) {
         screen.text("Marble Maze", minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3), true, TextAlign::center_center);
         screen.text("Press A to start", minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 2 / 3), true, TextAlign::center_center);
     }
-    else if (state == 1) {
+    else if (state == State::game) {
         screen.text(std::to_string(tilt.x), minimal_font, Point(SCREEN_WIDTH / 3, SCREEN_HEIGHT / 2), true, TextAlign::right);
         screen.text(std::to_string(tilt.y), minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), true, TextAlign::left);
 
@@ -199,13 +204,13 @@ void update(uint32_t time) {
     dt = (time - lastTime) / 1000.0;
     lastTime = time;
     
-    if (state == 0) {
+    if (state == State::title) {
         if (buttons.pressed & Button::A) {
-            state = 1;
+            state = State::game;
             start_game();
         }
     }
-    else if (state == 1) {
+    else if (state == State::game) {
         marble.xVelocity += tilt.x * std::abs(tilt.x) * ACCELERATION * dt; //blit::tilt.x * ACCELERATION; //squared for damping
         marble.yVelocity += tilt.y * std::abs(tilt.y) * ACCELERATION * dt; //blit::tilt.y * ACCELERATION;
 
