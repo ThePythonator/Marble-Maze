@@ -17,8 +17,6 @@
 
 using namespace blit;
 
-void load_level(int);
-
 struct Ball {
     float xPosition, yPosition;
     float xVelocity, yVelocity;
@@ -30,6 +28,8 @@ struct Wall {
     int x, y;
     int type;
 };
+
+void load_level(int);
 
 int state = 0;
 float dt;
@@ -112,7 +112,7 @@ void handle_collisions() {
 void start_game() {
     marble.xPosition = marble.yPosition = 80; //remove later
 
-    //load_level(0);
+    load_level(0);
 }
 
 void load_level(int levelNumber) {
@@ -140,7 +140,8 @@ void load_level(int levelNumber) {
 //
 void init() {
     set_screen_mode(ScreenMode::hires);
-    //screen.sprites = Surface::load(asset_sprites);
+    screen.sprites = Surface::load(asset_sprites);
+    state = 0; //need this for some reason
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -164,7 +165,7 @@ void render(uint32_t time) {
     if (state == 0) {
         screen.text("Marble Maze", minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3), true, TextAlign::center_center);
         screen.text("Press A to start", minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 2 / 3), true, TextAlign::center_center);
-    }/*
+    }
     else if (state == 1) {
         screen.text(std::to_string(tilt.x), minimal_font, Point(SCREEN_WIDTH / 3, SCREEN_HEIGHT / 2), true, TextAlign::right);
         screen.text(std::to_string(tilt.y), minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), true, TextAlign::left);
@@ -173,10 +174,10 @@ void render(uint32_t time) {
             render_wall(walls.at(i));
         }
 
-        //render_ball();
+        render_ball();
 
         screen.rectangle(Rect(marble.xPosition - SPRITE_SIZE / 2, marble.yPosition - SPRITE_SIZE / 2, SPRITE_SIZE, SPRITE_SIZE));
-    }*/
+    }
 
     screen.text(std::to_string(state), minimal_font, Point(20, 20));
 
@@ -197,7 +198,7 @@ void render(uint32_t time) {
 void update(uint32_t time) {
     dt = (time - lastTime) / 1000.0;
     lastTime = time;
-    /*
+    
     if (state == 0) {
         if (buttons.pressed & Button::A) {
             state = 1;
@@ -234,5 +235,5 @@ void update(uint32_t time) {
         }
         
         // check collisions
-    }*/
+    }
 }
