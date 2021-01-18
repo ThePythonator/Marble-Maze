@@ -74,7 +74,7 @@ void render_wall(Wall wall) {
 }
 
 bool colliding(Wall wall) {
-    return false;
+    return (marble.xPosition > wall.xPosition - SPRITE_SIZE && marble.xPosition < wall.xPosition + SPRITE_SIZE) && (marble.yPosition > wall.yPosition - SPRITE_SIZE && marble.yPosition< wall.yPosition + SPRITE_SIZE);
 }
 
 void handle_collisions() {
@@ -87,47 +87,49 @@ void handle_collisions() {
     for (int i = 0; i < walls.size(); i++) {
         if (walls.at(i).x == roughX || walls.at(i).x == roughX + 1) {
             if (walls.at(i).y == roughY || walls.at(i).y == roughY + 1) {
-                // collided with Wall
+                if (colliding(walls.at(i))) {
+                    // collided with wall.at(i)
 
-                if (walls.at(i).type == 0 || walls.at(i).type == 1 || walls.at(i).type == 2 || walls.at(i).type == 3) {
-                    //corner
-                    while (colliding(walls.at(i))) {
-                        marble.xPosition -= tilt.x;
-                        marble.yPosition -= tilt.y;
+                    if (walls.at(i).type == 0 || walls.at(i).type == 1 || walls.at(i).type == 2 || walls.at(i).type == 3) {
+                        //corner
+                        while (colliding(walls.at(i))) {
+                            marble.xPosition -= tilt.x;
+                            marble.yPosition -= tilt.y;
+                        }
+                        if (marble.xPosition <= walls.at(i).xPosition - SPRITE_SIZE || marble.xPosition >= walls.at(i).xPosition + SPRITE_SIZE) {
+                            marble.xVelocity = 0;
+                        }
+                        else {
+                            marble.yVelocity = 0;
+                        }
+                    }/*
+                    else if (walls.at(i).type == 1) {
+                        //corner
                     }
-                    if (marble.xPosition + SPRITE_SIZE <= walls.at(i).xPosition) {
+                    else if (walls.at(i).type == 2) {
+                        //corner
+                    }
+                    else if (walls.at(i).type == 3) {
+                        //corner
+                    }*/
+                    else if (walls.at(i).type == 4) {
                         marble.xVelocity = 0;
+                        marble.xPosition = walls.at(i).xPosition - SPRITE_SIZE;
                     }
-                    else {
+                    else if (walls.at(i).type == 5) {
+                        marble.xVelocity = 0;
+                        marble.xPosition = walls.at(i).xPosition + SPRITE_SIZE;
+                    }
+                    else if (walls.at(i).type == 6) {
                         marble.yVelocity = 0;
+                        marble.yPosition = walls.at(i).yPosition - SPRITE_SIZE;
                     }
-                }/*
-                else if (walls.at(i).type == 1) {
-                    //corner
+                    else if (walls.at(i).type == 7) {
+                        marble.yVelocity = 0;
+                        marble.yPosition = walls.at(i).yPosition + SPRITE_SIZE;
+                    }
+                    // ignore 8...12 because they are always surrounded by other blocks
                 }
-                else if (walls.at(i).type == 2) {
-                    //corner
-                }
-                else if (walls.at(i).type == 3) {
-                    //corner
-                }*/
-                else if (walls.at(i).type == 4) {
-                    marble.xVelocity = 0;
-                    marble.xPosition = walls.at(i).xPosition - SPRITE_SIZE;
-                }
-                else if (walls.at(i).type == 5) {
-                    marble.xVelocity = 0;
-                    marble.xPosition = walls.at(i).xPosition + SPRITE_SIZE;
-                }
-                else if (walls.at(i).type == 6) {
-                    marble.yVelocity = 0;
-                    marble.yPosition = walls.at(i).yPosition - SPRITE_SIZE;
-                }
-                else if (walls.at(i).type == 7) {
-                    marble.yVelocity = 0;
-                    marble.yPosition = walls.at(i).yPosition + SPRITE_SIZE;
-                }
-                // ignore 8...12 because they are always surrounded by other blocks
             }
         }
     }
