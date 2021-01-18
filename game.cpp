@@ -73,6 +73,10 @@ void render_wall(Wall wall) {
     screen.sprite(wall.type, Point(wall.xPosition - SPRITE_SIZE / 2, wall.yPosition - SPRITE_SIZE / 2));
 }
 
+bool colliding(Wall wall) {
+    return false;
+}
+
 void handle_collisions() {
     int roughX, roughY;
     roughX = (marble.xPosition - SPRITE_SIZE / 2) / SPRITE_SIZE;
@@ -85,9 +89,19 @@ void handle_collisions() {
             if (walls.at(i).y == roughY || walls.at(i).y == roughY + 1) {
                 // collided with Wall
 
-                if (walls.at(i).type == 0) {
+                if (walls.at(i).type == 0 || walls.at(i).type == 1 || walls.at(i).type == 2 || walls.at(i).type == 3) {
                     //corner
-                }
+                    while (colliding(walls.at(i))) {
+                        marble.xPosition -= tilt.x;
+                        marble.yPosition -= tilt.y;
+                    }
+                    if (marble.xPosition + SPRITE_SIZE <= walls.at(i).xPosition) {
+                        marble.xVelocity = 0;
+                    }
+                    else {
+                        marble.yVelocity = 0;
+                    }
+                }/*
                 else if (walls.at(i).type == 1) {
                     //corner
                 }
@@ -96,10 +110,10 @@ void handle_collisions() {
                 }
                 else if (walls.at(i).type == 3) {
                     //corner
-                }
+                }*/
                 else if (walls.at(i).type == 4) {
                     marble.xVelocity = 0;
-                    marble.xPosition = walls.at(i).xPosition;
+                    marble.xPosition = walls.at(i).xPosition - SPRITE_SIZE;
                 }
                 else if (walls.at(i).type == 5) {
                     marble.xVelocity = 0;
@@ -107,7 +121,7 @@ void handle_collisions() {
                 }
                 else if (walls.at(i).type == 6) {
                     marble.yVelocity = 0;
-                    marble.yPosition = walls.at(i).yPosition;
+                    marble.yPosition = walls.at(i).yPosition - SPRITE_SIZE;
                 }
                 else if (walls.at(i).type == 7) {
                     marble.yVelocity = 0;
