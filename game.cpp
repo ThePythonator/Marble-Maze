@@ -11,9 +11,9 @@
 #define LEVEL_LENGTH 1200
 
 #define SPEED 100
-#define ACCELERATION 5
+#define ACCELERATION 8
 
-#define MAX_VELOCITY 1
+#define MAX_VELOCITY 2
 
 using namespace blit;
 
@@ -98,16 +98,20 @@ void handle_collisions() {
                     //corner
                 }
                 else if (walls.at(i).type == 4) {
-                    marble.xVelocity = -marble.xVelocity;
+                    marble.xVelocity = 0;
+                    marble.xPosition = walls.at(i).xPosition;
                 }
                 else if (walls.at(i).type == 5) {
-                    marble.xVelocity = -marble.xVelocity;
+                    marble.xVelocity = 0;
+                    marble.xPosition = walls.at(i).xPosition + SPRITE_SIZE;
                 }
                 else if (walls.at(i).type == 6) {
-                    marble.yVelocity = -marble.yVelocity;
+                    marble.yVelocity = 0;
+                    marble.yPosition = walls.at(i).yPosition;
                 }
                 else if (walls.at(i).type == 7) {
-                    marble.yVelocity = -marble.yVelocity;
+                    marble.yVelocity = 0;
+                    marble.yPosition = walls.at(i).yPosition + SPRITE_SIZE;
                 }
                 // ignore 8...12 because they are always surrounded by other blocks
             }
@@ -240,5 +244,6 @@ void update(uint32_t time) {
         }
         
         // check collisions
+        handle_collisions();
     }
 }
