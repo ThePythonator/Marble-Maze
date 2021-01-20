@@ -165,6 +165,8 @@ void start_game() {
 }
 
 void load_level(int levelNumber) {
+    walls.clear();
+
     if (levelNumber < LEVEL_COUNT) {
         currentLevel = levelNumber;
 
