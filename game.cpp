@@ -114,11 +114,11 @@ void handle_collisions() {
                             marble.xPosition -= tilt.x;
                             marble.yPosition -= tilt.y;
                         }
-                        if (marble.xPosition + SPRITE_SIZE / 2 >= walls.at(i).xPosition && marble.xPosition <= walls.at(i).xPosition + SPRITE_SIZE * 2) {
-                            marble.yVelocity = 0;
+                        if (marble.xPosition + SPRITE_SIZE / 2 >= walls.at(i).xPosition && marble.xPosition - SPRITE_SIZE / 2 <= walls.at(i).xPosition + SPRITE_SIZE * 2) {
+                            marble.yVelocity = -marble.yVelocity;
                         }
                         else {
-                            marble.xVelocity = 0;
+                            marble.xVelocity = -marble.xVelocity;
                         }
                     }/*
                     else if (walls.at(i).type == 1) {
@@ -131,19 +131,19 @@ void handle_collisions() {
                         //corner
                     }*/
                     else if (walls.at(i).type == 4) {
-                        marble.xVelocity = 0;
+                        marble.xVelocity = -marble.xVelocity;
                         marble.xPosition = walls.at(i).xPosition - SPRITE_SIZE;
                     }
                     else if (walls.at(i).type == 5) {
-                        marble.xVelocity = 0;
+                        marble.xVelocity = -marble.xVelocity;
                         marble.xPosition = walls.at(i).xPosition + SPRITE_SIZE;
                     }
                     else if (walls.at(i).type == 6) {
-                        marble.yVelocity = 0;
+                        marble.yVelocity = -marble.yVelocity;
                         marble.yPosition = walls.at(i).yPosition - SPRITE_SIZE;
                     }
                     else if (walls.at(i).type == 7) {
-                        marble.yVelocity = 0;
+                        marble.yVelocity = -marble.yVelocity;
                         marble.yPosition = walls.at(i).yPosition + SPRITE_SIZE;
                     }
                     // ignore 8...12 because they are always surrounded by other blocks
