@@ -237,8 +237,8 @@ void render(uint32_t time) {
         screen.text("Press A to start", minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 2 / 3), true, TextAlign::center_center);
     }
     else if (state == State::game) {
-        screen.text(std::to_string(tilt.x), minimal_font, Point(SCREEN_WIDTH / 3, SCREEN_HEIGHT / 2), true, TextAlign::right);
-        screen.text(std::to_string(tilt.y), minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), true, TextAlign::left);
+        //screen.text(std::to_string(tilt.x), minimal_font, Point(SCREEN_WIDTH / 3, SCREEN_HEIGHT / 2), true, TextAlign::right);
+        //screen.text(std::to_string(tilt.y), minimal_font, Point(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), true, TextAlign::left);
 
         for (int i = 0; i < walls.size(); i++) {
             render_wall(walls.at(i));
@@ -251,7 +251,7 @@ void render(uint32_t time) {
         //screen.rectangle(Rect(marble.xPosition - SPRITE_SIZE / 2, marble.yPosition - SPRITE_SIZE / 2, SPRITE_SIZE, SPRITE_SIZE));
     }
 
-    screen.text(std::to_string(state), minimal_font, Point(20, 20));
+    //screen.text(std::to_string(state), minimal_font, Point(20, 20));
 
     screen.pen = Pen(0, 0, 0);
     //screen.text("Hello 32blit!", minimal_font, Point(5, 4));
