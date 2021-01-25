@@ -111,14 +111,17 @@ void handle_collisions() {
                     if (walls.at(i).type == 0 || walls.at(i).type == 1 || walls.at(i).type == 2 || walls.at(i).type == 3) {
                         //corner
                         while (colliding(walls.at(i))) {
-                            marble.xPosition -= tilt.x * std::abs(tilt.x) * (marble.xVelocity > 0 ? 1 : -1);
-                            marble.yPosition -= tilt.x * std::abs(tilt.x) * (marble.yVelocity > 0 ? 1 : -1);
+                            //marble.xPosition -= tilt.x * std::abs(tilt.x) * (marble.xVelocity > 0 ? 1 : -1);
+                            //marble.yPosition -= tilt.x * std::abs(tilt.x) * (marble.yVelocity > 0 ? 1 : -1);
+
+                            marble.xPosition -= marble.xVelocity * dt * SPEED;
+                            marble.yPosition -= marble.yVelocity * dt * SPEED;
                         }
-                        if (marble.xPosition + SPRITE_SIZE / 2 >= walls.at(i).xPosition && marble.xPosition - SPRITE_SIZE / 2 <= walls.at(i).xPosition + SPRITE_SIZE * 2) {
-                            marble.yVelocity = -0.1 * marble.yVelocity;
+                        if (marble.xPosition + SPRITE_SIZE / 2 >= walls.at(i).xPosition - SPRITE_SIZE / 2 && marble.xPosition - SPRITE_SIZE / 2 <= walls.at(i).xPosition + SPRITE_SIZE / 2) {
+                            marble.yVelocity = -0.5 * marble.yVelocity;
                         }
                         else {
-                            marble.xVelocity = -0.1 * marble.xVelocity;
+                            marble.xVelocity = -0.5 * marble.xVelocity;
                         }
                     }/*
                     else if (walls.at(i).type == 1) {
@@ -131,19 +134,19 @@ void handle_collisions() {
                         //corner
                     }*/
                     else if (walls.at(i).type == 4) {
-                        marble.xVelocity = -0.1 * marble.xVelocity;
+                        marble.xVelocity = -0.5 * marble.xVelocity;
                         marble.xPosition = walls.at(i).xPosition - SPRITE_SIZE;
                     }
                     else if (walls.at(i).type == 5) {
-                        marble.xVelocity = -0.1 * marble.xVelocity;
+                        marble.xVelocity = -0.5 * marble.xVelocity;
                         marble.xPosition = walls.at(i).xPosition + SPRITE_SIZE;
                     }
                     else if (walls.at(i).type == 6) {
-                        marble.yVelocity = -0.1 * marble.yVelocity;
+                        marble.yVelocity = -0.5 * marble.yVelocity;
                         marble.yPosition = walls.at(i).yPosition - SPRITE_SIZE;
                     }
                     else if (walls.at(i).type == 7) {
-                        marble.yVelocity = -0.1 * marble.yVelocity;
+                        marble.yVelocity = -0.5 * marble.yVelocity;
                         marble.yPosition = walls.at(i).yPosition + SPRITE_SIZE;
                     }
                     // ignore 8...12 because they are always surrounded by other blocks
@@ -290,20 +293,20 @@ void update(uint32_t time) {
 
         if (marble.xPosition < SPRITE_SIZE / 2) {
             marble.xPosition = SPRITE_SIZE / 2;
-            marble.xVelocity = -0.1 * marble.xVelocity;
+            marble.xVelocity = -0.5 * marble.xVelocity;
         }
         else if (marble.xPosition > SCREEN_WIDTH - SPRITE_SIZE / 2) {
             marble.xPosition = SCREEN_WIDTH - SPRITE_SIZE / 2;
-            marble.xVelocity = -0.1 * marble.xVelocity;
+            marble.xVelocity = -0.5 * marble.xVelocity;
         }
 
         if (marble.yPosition < SPRITE_SIZE / 2) {
             marble.yPosition = SPRITE_SIZE / 2;
-            marble.yVelocity = -0.1 * marble.yVelocity;
+            marble.yVelocity = -0.5 * marble.yVelocity;
         }
         else if (marble.yPosition > SCREEN_HEIGHT - SPRITE_SIZE / 2) {
             marble.yPosition = SCREEN_HEIGHT - SPRITE_SIZE / 2;
-            marble.yVelocity = -0.1 * marble.yVelocity;
+            marble.yVelocity = -0.5 * marble.yVelocity;
         }
         
         // check collisions
