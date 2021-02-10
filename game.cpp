@@ -11,7 +11,7 @@
 #define LEVEL_LENGTH 1200
 
 #define SPEED 100
-#define ACCELERATION 8
+#define ACCELERATION 12
 
 #define MAX_VELOCITY 2
 
