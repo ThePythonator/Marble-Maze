@@ -10,7 +10,8 @@ project(${PROJECT_NAME})
 set(GAME_SOURCES
 	"MarbleMaze.cpp"
 
-	#".cpp"
+	"Timer.cpp"
+	"Level.cpp"
 
 	"Constants.cpp"
 )
