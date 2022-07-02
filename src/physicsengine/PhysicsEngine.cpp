@@ -154,7 +154,7 @@ namespace PhysicsEngine {
 		}
 
 		// Calculate gravity between every unique pair of objects
-		for (uint16_t i = 0; i < bodies.size(); i++) {
+		/*for (uint16_t i = 0; i < bodies.size(); i++) {
 			for (uint16_t j = i + 1; j < bodies.size(); j++) {
 
 				phyvec difference = bodies[j]->centre - bodies[i]->centre;
@@ -168,19 +168,11 @@ namespace PhysicsEngine {
 
 					phyvec force = force_magnitude * difference / dist;
 
-					//printf("Gravity: %f\n", force_magnitude / bodies[j].mass);
-					//printf("grav mag: %f\n", force_magnitude);
-
-
-					/*printf("dist: %f\n", dist_squared);
-					printf("c: %f, %f\n", bodies[j].centre.x, bodies[j].centre.y);
-					printf("v: %f, %f\n", bodies[j].velocity.x, bodies[j].velocity.y);*/
-
 					bodies[i]->apply_force(force);
 					bodies[j]->apply_force(-force);
 				}
 			}
-		}
+		}*/
 	}
 
 	void PhysicsManager::update_constraints() {

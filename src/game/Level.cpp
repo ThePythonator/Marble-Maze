@@ -70,10 +70,6 @@ namespace MarbleMaze {
 	}
 
 	void Level::render(blit::Surface* screen) {
-		for (PhysicsEngine::RigidBody* body_ptr : physics.get_bodies()) {
-			screen->sprite(body_ptr->ids[0], blit::Point(body_ptr->centre.x - Constants::SPRITE_SIZE / 2, body_ptr->centre.y - Constants::SPRITE_SIZE / 2));
-		}
-
 		// Render finish
 		for (uint8_t y = 0; y < 2; y++) {
 			for (uint8_t x = 0; x < 2; x++) {
@@ -81,6 +77,11 @@ namespace MarbleMaze {
 
 				screen->sprite(tile_id, blit::Point(finish_ptr->centre.x + (x - 1) * Constants::SPRITE_SIZE, finish_ptr->centre.y + (y - 1) * Constants::SPRITE_SIZE));
 			}
+		}
+
+		// Render everything else
+		for (PhysicsEngine::RigidBody* body_ptr : physics.get_bodies()) {
+			screen->sprite(body_ptr->ids[0], blit::Point(body_ptr->centre.x - Constants::SPRITE_SIZE / 2, body_ptr->centre.y - Constants::SPRITE_SIZE / 2));
 		}
 	}
 
