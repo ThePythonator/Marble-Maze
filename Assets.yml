@@ -2,7 +2,7 @@
 # link automagically.
 # References can be picked up by including assets.hpp
 
-assets.cpp:
+Assets.cpp:
   assets/background.png:
     name: asset_background
 
