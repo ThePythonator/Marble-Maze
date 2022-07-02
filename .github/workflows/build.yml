@@ -31,12 +31,14 @@ jobs:
             release-suffix: LIN64
             cmake-args: -D32BLIT_DIR=$GITHUB_WORKSPACE/32blit-sdk
             apt-packages: libsdl2-dev libsdl2-image-dev libsdl2-net-dev python3-setuptools
+            can-fail: false
 
           - os: ubuntu-20.04
             name: STM32
             release-suffix: STM32
             cmake-args: -DCMAKE_TOOLCHAIN_FILE=$GITHUB_WORKSPACE/32blit-sdk/32blit.toolchain
             apt-packages: gcc-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib python3-setuptools
+            can-fail: false
 
           - os: ubuntu-20.04
             name: Emscripten
@@ -44,19 +46,23 @@ jobs:
             cmake-args: -D32BLIT_DIR=$GITHUB_WORKSPACE/32blit-sdk
             cmake-prefix: emcmake
             apt-packages: python3-setuptools
+            can-fail: true
 
           - os: macos-latest
             name: macOS
             release-suffix: MACOS
             cmake-args: -D32BLIT_DIR=$GITHUB_WORKSPACE/32blit-sdk
             brew-packages: sdl2 sdl2_image sdl2_net
+            can-fail: false
 
           - os: windows-latest
             name: Visual Studio
             release-suffix: WIN64
             cmake-args: -D32BLIT_DIR=$GITHUB_WORKSPACE/32blit-sdk
+            can-fail: false
 
     runs-on: ${{matrix.os}}
+    continue-on-error: ${{ matrix.can-fail }}
 
     env:
       RELEASE_FILE: ${{github.event.repository.name}}-${{github.event.release.tag_name}}-${{matrix.release-suffix}}
