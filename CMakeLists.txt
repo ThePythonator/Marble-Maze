@@ -12,6 +12,7 @@ set(GAME_SOURCES
 
 	"Timer.cpp"
 	"Level.cpp"
+	"Utilities.cpp"
 
 	"Constants.cpp"
 )

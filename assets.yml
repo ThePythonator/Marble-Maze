@@ -8,3 +8,8 @@ assets.cpp:
 
   assets/spritesheet.png:
     name: asset_sprites
+
+  assets/level_0.tmx:
+    name: asset_level_0
+    empty_tile: 255
+    output_struct: true

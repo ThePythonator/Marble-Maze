@@ -13,6 +13,10 @@ Utilities::Timer flashy_text_timer = Utilities::Timer(Constants::Timings::FLASHY
 
 Level current_level;
 
+const uint8_t* level_data[] = {
+    asset_level_0
+};
+
 enum class GameState {
     Menu,
     Game
@@ -40,9 +44,18 @@ void render(uint32_t time) {
         screen.text(Constants::Strings::TITLE_TEXT, minimal_font, Point(Constants::SCREEN_WIDTH / 2, 10), true, top_center);
 
         if (flashy_text_timer.time() < Constants::Timings::FLASHY_TEXT_ON) screen.text(Constants::Strings::PLAY_TEXT, minimal_font, Point(Constants::SCREEN_WIDTH / 2, Constants::SCREEN_HEIGHT - 10), true, bottom_center);
+        
         break;
 
     case GameState::Game:
+        current_level.render(&screen);
+
+        if (current_level.complete()) {
+            screen.pen = Pen(rand() % 256, rand() % 256, rand() % 256);
+            screen.text("Well done", minimal_font, Point(Constants::SCREEN_WIDTH / 2, 10), true, top_center);
+            screen.pen = Pen(255, 255, 255);
+        }
+
         break;
 
     default:
@@ -65,13 +78,14 @@ void update(uint32_t time) {
 
         if (buttons & Button::A) {
             // Create level
-            current_level = Level(); // TODO: change to select level number?
+            current_level = Level(level_data[0]); // TODO: change to select level number?
 
             current_state = GameState::Game;
         }
         break;
 
     case GameState::Game:
+        current_level.update(dt);
         break;
 
     default:
