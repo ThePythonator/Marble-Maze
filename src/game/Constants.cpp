@@ -8,7 +8,7 @@ namespace MarbleMaze {
 		const uint8_t SPRITE_SIZE = 8;
 
 		const float TILT_FORCE = 10000.0f;
-		const float DRAG_SCALE = 100.0f;
+		const float DRAG_SCALE = 40.0f;
 
 		const uint8_t LEVEL_COUNT = 1;
 

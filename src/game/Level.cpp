@@ -57,8 +57,8 @@ namespace MarbleMaze {
 	}
 
 	void Level::update(float dt) {
-		PhysicsEngine::phyvec force(blit::tilt.x, blit::tilt.y); // there's also tilt.z - not sure what to use?
-		//PhysicsEngine::phyvec force(blit::joystick.x, blit::joystick.y); // there's also tilt.z - not sure what to use?
+		//PhysicsEngine::phyvec force(blit::tilt.x, blit::tilt.y); // there's also tilt.z - not sure what to use?
+		PhysicsEngine::phyvec force(blit::joystick.x, blit::joystick.y); // there's also tilt.z - not sure what to use?
 
 		force *= Constants::TILT_FORCE;
 
