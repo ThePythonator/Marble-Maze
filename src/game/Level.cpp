@@ -12,7 +12,7 @@ namespace MarbleMaze {
 		PhysicsEngine::phyvec ball_centre, finish_centre;
 
 		PhysicsEngine::Circle* ball_shape_ptr = new PhysicsEngine::Circle(Constants::SPRITE_SIZE / 2);
-		PhysicsEngine::Circle* finish_shape_ptr = new PhysicsEngine::Circle(Constants::SPRITE_SIZE);
+		PhysicsEngine::Circle* finish_shape_ptr = new PhysicsEngine::Circle(Constants::SPRITE_SIZE * 1.5f); // should I have 1.5f or not?
 		PhysicsEngine::Polygon* wall_rect_ptr = PhysicsEngine::create_rect(PhysicsEngine::phyvec(Constants::SPRITE_SIZE));
 
 		blit::TMX* tmx_data = (blit::TMX*)(level_data);

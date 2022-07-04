@@ -7,7 +7,7 @@
 namespace PhysicsEngine {
 	struct ContactData {
 		phyvec contact_point;
-		double penetration_distance;
+		phyflt penetration_distance;
 	};
 
 	struct CollisionInformation {
